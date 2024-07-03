@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1</title>
+</head>
+<body>
+    <script>
+        let arr = [];
+        function submit() {
+            const inputfield1 = document.getElementById('name').value;
+            const inputfield2 = document.getElementById('Mail').value;
+            const inputfield3 = document.getElementById('phone').value;
+
+            let data ={
+                name: inputfield1,
+                mail: inputfield2,
+                phone:inputfield3
+            };
+            arr.push(data);
+            document.getElementById('name').value = '';
+            document.getElementById('Mail').value = '';
+            document.getElementById('phone').value = '';
+        }
+        function showAll() {
+            arr.forEach(function(element) {
+                console.log(element);
+            });
+        }
+        function clearData() {
+            arr.splice(0, arr.length);
+            console.log(arr);
+        }
+        function show(){
+            const searchName = document.getElementById('search').value;
+            let found = 0;
+            arr.forEach(function(element) {
+                if (element.name.toLowerCase() === searchName.toLowerCase()) {
+                    console.log(element);
+                    found = 1;
+                }
+            });
+            if (found===0) {
+                console.log('No record found!');
+            }
+            document.getElementById('search').value = '';
+        }
+        function deleteitem(){
+            const searchName = document.getElementById('delete').value.toLowerCase();
+            let found = 0;
+            for(let i=0;i<arr.length;i++) {
+                if (arr[i].name.toLowerCase() === searchName) {
+                    arr.splice(i,1);
+                    console.log('Data deleted Successfully');
+                    found = 1;
+                    break;
+                }
+            };
+            if (found===0) {
+                console.log('No such record found to delete!');
+            }
+            document.getElementById('delete').value = '';
+        }
+        function modify(){
+            const searchName = document.getElementById('modify1').value;
+            const searchMail = document.getElementById('modify2').value;
+            const searchPhone = document.getElementById('modify3').value;
+            let found = 0;
+            for(let i=0;i<arr.length;i++) {
+                if (arr[i].name.toLowerCase() === searchName.toLowerCase() ||
+            arr[i].mail.toLowerCase() === searchMail.toLowerCase() ||
+            arr[i].phone.toLowerCase() === searchPhone.toLowerCase()) {
+            arr[i].name = searchName;
+            arr[i].mail = searchMail;
+            arr[i].phone = searchPhone;
+            console.log('Data Successfully Modified!');
+            found = 1;
+            break;
+        }
+            };
+            if (found===0) {
+                console.log('No similar record has been found to Modify!');
+            }
+            document.getElementById('modify1').value = '';
+            document.getElementById('modify2').value = '';
+            document.getElementById('modify3').value = '';
+        }
+        
+    </script>
+    <label>Name:</label>
+    <input type="text" id="name"><br><br>
+    <label>Mail:</label>
+    <input type="text" id="Mail"><br><br>
+    <label>Ph no:</label>
+    <input type="text" id="phone"><br><br>
+    <button onclick="submit()">Submit</button>
+    <button onclick="showAll()">Show all Data</button>
+    <button onclick="clearData()">Clear Data</button><br><br>
+    <label>To show individual record:</label>
+    <input type="text" id="search" placeholder="Enter name">
+    <button onclick="show()">Show</button><br><br>
+    <label>To delete individual record:</label>
+    <input type="text" id="delete" placeholder="Enter name">
+    <button onclick="deleteitem()">Delete</button><br><br>
+    <label>To modify individual record:</label>
+    <input type="text" id="modify1" placeholder="Enter name">
+    <input type="text" id="modify2" placeholder='Mail'>
+    <input type="text" id="modify3" placeholder="Phone">
+    <button onclick="modify()">Modify</button>
+</body>
+</html>
